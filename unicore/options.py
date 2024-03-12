@@ -207,6 +207,7 @@ def get_parser(desc, default_task="test"):
     parser.add_argument('--profile', action='store_true', help="enable autograd profiler emit_nvtx")
     parser.add_argument('--ema-decay', default=-1.0, type=float, help="enable moving average for model weights")
     parser.add_argument("--validate-with-ema", action="store_true")
+    parser.add_argument("--use-fp8", action="store_true")
     
 
     from unicore.registry import REGISTRIES

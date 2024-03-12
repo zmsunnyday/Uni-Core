@@ -134,6 +134,9 @@ def batch_by_size(
     steps *= step
     batch_indices = np.split(indices, steps)
     assert len(batch_indices) == num_batches
+    if batch_indices[-1].shape[0]%16 != 0:
+        new_len = batch_indices[-1].shape[0] - batch_indices[-1].shape[0]%16
+        batch_indices[-1] = batch_indices[-1][:new_len]
     # validation or test data size is smaller than a mini-batch size in some downstream tasks.
-    assert batch_indices[0].shape[0] <= step
+    assert batch_indices[0].shape[0] <= step and batch_indices[-1].shape[0]%16 == 0
     return batch_indices
